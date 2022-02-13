@@ -1,0 +1,25 @@
+.Container {
+  box-sizing: border-box;
+  box-shadow: 2px 4px 6px 0px rgba(34, 60, 80, 0.15);
+  background-color: #fff;
+}
+
+.Info {
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.Title {
+  font-weight: 700;
+  margin-bottom: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+.Date {
+  margin-top: 0;
+  font-weight: 100;
+  color: grey;
+}

@@ -1,0 +1,9 @@
+.List {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.Item {
+  width: calc((100% - 40px) / 3);
+}

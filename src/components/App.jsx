@@ -1,17 +1,19 @@
+import { Routes, Route } from 'react-router-dom';
+
+import HomePage from 'pages/HomePage';
+import AppBar from './AppBar';
+import Container from './Container';
+import SearchPage from 'pages/SearchPage/SearchPage';
+
 export const App = () => {
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        textTransform: 'uppercase',
-        color: '#010101',
-      }}
-    >
-      React homework template
-    </div>
+    <Container>
+      <AppBar />
+
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/search" element={<SearchPage />} />
+      </Routes>
+    </Container>
   );
 };
