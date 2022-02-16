@@ -8,14 +8,46 @@ async function fetchWithErrorHandling(url = '', config = {}) {
     : Promise.reject(new Error('Something went wrong'));
 }
 
-export function fetchTrending(type = 'all', time = 'week') {
+export function fetchTrending({ pageParam = 1 }) {
   return fetchWithErrorHandling(
-    `${BASE_URL}/trending/${type}/${time}?api_key=${API_KEY}`
+    `${BASE_URL}/trending/movie/week?api_key=${API_KEY}&page=${pageParam}`
   );
 }
 
-export function searchByName(title = '', filter = 'movie') {
+export function searchByName({ queryKey, pageParam = 1 }, filter = 'movie') {
+  if (!queryKey[1]) {
+    return;
+  }
+
   return fetchWithErrorHandling(
-    `${BASE_URL}/search/${filter}?api_key=${API_KEY}&query=${title}`
+    `${BASE_URL}/search/${filter}?api_key=${API_KEY}&query=${queryKey[1]}&page=${pageParam}`
   );
 }
+
+export function searchById({ queryKey }) {
+  if (!queryKey) {
+    return;
+  }
+
+  return fetchWithErrorHandling(
+    `${BASE_URL}/movie/${queryKey}?api_key=${API_KEY}`
+  );
+}
+
+export function fetchCredits({ queryKey }) {
+  return fetchWithErrorHandling(
+    `${BASE_URL}/movie/${queryKey[1]}/credits?api_key=${API_KEY}`
+  );
+}
+
+export function fetchReviews({ queryKey }) {
+  return fetchWithErrorHandling(
+    `${BASE_URL}/movie/${queryKey[1]}/reviews?api_key=${API_KEY}`
+  );
+}
+
+// get config
+// fetch(`
+// https://api.themoviedb.org/3/configuration?api_key=${API_KEY}`)
+//   .then(r => r.json())
+//   .then(console.log);

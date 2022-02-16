@@ -1,0 +1,34 @@
+.List {
+  margin-bottom: 10px;
+}
+
+.Item {
+  padding: 5px 0;
+  border-bottom: 1px solid grey;
+}
+
+.Title_block {
+  display: flex;
+  align-items: center;
+}
+
+.Avatar {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+}
+
+.Avatar_placeholder {
+  composes: Avatar;
+  background-color: grey;
+}
+
+.Name {
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.Content {
+  padding: 10px;
+}

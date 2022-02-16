@@ -1,19 +1,29 @@
-import MoviesList from 'components/MoviesList';
-import { useEffect, useState } from 'react';
+import { useInfiniteQuery } from 'react-query';
+
 import { fetchTrending } from 'services/imdbAPI';
+import MoviesList from 'components/MoviesList';
+import Loader from 'components/Loader';
+import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
 
-export default function HomePage() {
-  const [media, setMedia] = useState([]);
+export default function HomePage({ setPrevLocation }) {
+  const { data, fetchNextPage, isLoading } = useInfiniteQuery(
+    'media',
+    fetchTrending,
+    {
+      getNextPageParam: (lastPage, pages) => lastPage.page + 1,
+    }
+  );
 
+  const location = useLocation();
   useEffect(() => {
-    fetchTrending()
-      .then(r => setMedia(r.results))
-      .catch(console.log);
-  }, []);
+    setPrevLocation(location);
+  }, [location, setPrevLocation]);
 
   return (
     <>
-      <MoviesList media={media} />
+      {isLoading && <Loader />}
+      {data && <MoviesList fetchNextPage={fetchNextPage} media={data?.pages} />}
     </>
   );
 }
