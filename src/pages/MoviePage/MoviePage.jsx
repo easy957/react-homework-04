@@ -20,7 +20,6 @@ export default function MoviePage({ prevLocation }) {
   });
 
   const location = useLocation();
-  console.log(location);
 
   const getDate = () => {
     const dateObj = new Date(data.first_air_date ?? data.release_date);
