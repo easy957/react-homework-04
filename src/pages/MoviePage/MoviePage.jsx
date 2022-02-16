@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 
 import { searchById } from 'services/imdbAPI';
 import { queryClient } from 'index';
@@ -18,6 +18,8 @@ export default function MoviePage({ prevLocation }) {
       return allCacheResults?.find(d => d.id === Number(movieId));
     },
   });
+
+  const location = useLocation();
 
   const getDate = () => {
     const dateObj = new Date(data.first_air_date ?? data.release_date);
@@ -78,6 +80,7 @@ export default function MoviePage({ prevLocation }) {
           <Link
             className={styles.Button}
             to={`/movie/${movieId}/credits`}
+            state={location.state}
             replace
           >
             Show credits
@@ -85,6 +88,7 @@ export default function MoviePage({ prevLocation }) {
           <Link
             className={styles.Button}
             to={`/movie/${movieId}/reviews`}
+            state={location.state}
             replace
           >
             Show reviews

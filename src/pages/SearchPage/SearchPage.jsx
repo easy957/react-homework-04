@@ -1,7 +1,7 @@
 import Loader from 'components/Loader';
 import InfiniteScroll from 'react-infinite-scroller';
 import { useInfiniteQuery } from 'react-query';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useSearchParams } from 'react-router-dom';
 
 import { searchByName } from 'services/imdbAPI';
 import styles from './SearchPage.module.css';
@@ -20,6 +20,8 @@ export default function SearchPage() {
       enabled: !!searchQuery,
     }
   );
+
+  const location = useLocation();
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -54,7 +56,11 @@ export default function SearchPage() {
             {data.pages.map(page =>
               page?.results.map(movie => (
                 <li key={movie.id}>
-                  <Link className={styles.Link} to={`/movie/${movie.id}`}>
+                  <Link
+                    state={location.pathname}
+                    className={styles.Link}
+                    to={`/movie/${movie.id}`}
+                  >
                     {movie.original_title}{' '}
                     <i>
                       ({getDate(movie.first_air_date ?? movie.release_date)})
