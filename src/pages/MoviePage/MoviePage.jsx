@@ -27,7 +27,11 @@ export default function MoviePage({ prevLocation }) {
   return (
     <>
       <Link
-        to={prevLocation.pathname + prevLocation.search}
+        to={
+          prevLocation.pathname
+            ? prevLocation.pathname + prevLocation.search
+            : '/'
+        }
         className={styles.Link_back}
       >
         Back

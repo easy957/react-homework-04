@@ -27,7 +27,7 @@ export default function Reviews() {
   return (
     <>
       {isLoading && <Loader color="grey" />}
-      {isSuccess && data.results?.length < 0 && (
+      {isSuccess && (
         <ul className={styles.List}>
           {data.results
             ?.sort((a, b) => b.author_details.rating - a.author_details.rating)
