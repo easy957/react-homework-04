@@ -1,1 +1,1 @@
-https://easy957.github.io/react-homework-04/
+https://easy957-react-homework-04.netlify.app/
