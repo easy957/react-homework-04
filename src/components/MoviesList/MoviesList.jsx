@@ -23,7 +23,15 @@ export default function MoviesList({ media, fetchNextPage }) {
           media.map(page =>
             page.results.map(el => (
               <li className={styles.Item} key={el.id}>
-                <Link to={`/movie/${el.id}`} state={location.pathname}>
+                <Link
+                  to={{
+                    pathname: `/movie/${el.id}`,
+                    state: {
+                      a: 'hello',
+                    },
+                  }}
+                  state={{ from: location.pathname }}
+                >
                   <MovieCard movie={el} />
                 </Link>
               </li>

@@ -57,7 +57,7 @@ export default function SearchPage() {
               page?.results.map(movie => (
                 <li key={movie.id}>
                   <Link
-                    state={location.pathname}
+                    state={{ from: location.pathname + location.search }}
                     className={styles.Link}
                     to={`/movie/${movie.id}`}
                   >

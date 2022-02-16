@@ -33,7 +33,7 @@ export default function AppBar() {
         <button
           type="button"
           onClick={() => {
-            navigate(location.state || '/');
+            navigate(location.state?.from || '/');
           }}
           className={styles.Link_back}
         >
