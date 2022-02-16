@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import { Link, Outlet, useNavigate, useParams } from 'react-router-dom';
+import { Link, Outlet, useParams } from 'react-router-dom';
 
 import { searchById } from 'services/imdbAPI';
 import { queryClient } from 'index';
@@ -8,7 +8,6 @@ import styles from './MoviePage.module.css';
 export default function MoviePage({ prevLocation }) {
   const { movieId } = useParams();
   const cache = queryClient.getQueryData();
-  const navigate = useNavigate();
   const allCacheResults = cache?.pages?.reduce(
     (acc, page) => [...acc, ...page.results],
     []
@@ -27,16 +26,6 @@ export default function MoviePage({ prevLocation }) {
 
   return (
     <>
-      <button
-        type="button"
-        onClick={() => {
-          navigate(-1);
-        }}
-        className={styles.Link_back}
-      >
-        Back
-      </button>
-
       {data && (
         <div className={styles.Container}>
           <div className={styles.TopInfo}>

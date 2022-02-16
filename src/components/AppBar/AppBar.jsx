@@ -1,7 +1,9 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import styles from './AppBar.module.css';
 
 export default function AppBar() {
+  const navigate = useNavigate();
+
   return (
     <header className={styles.Header}>
       <nav className={styles.Nav}>
@@ -27,6 +29,15 @@ export default function AppBar() {
             </NavLink>
           </li>
         </ul>
+        <button
+          type="button"
+          onClick={() => {
+            navigate(-1);
+          }}
+          className={styles.Link_back}
+        >
+          Go back
+        </button>
       </nav>
     </header>
   );
