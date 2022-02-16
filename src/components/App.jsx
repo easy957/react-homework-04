@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState } from 'react';
+import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import AppBar from './AppBar';
@@ -21,26 +21,15 @@ const MoviePage = lazy(() =>
 );
 
 export const App = () => {
-  const [location, setLocation] = useState('/');
-
   return (
     <Container>
       <AppBar />
 
       <Suspense fallback={<Loader />}>
         <Routes>
-          <Route
-            path="/"
-            element={<HomePage setPrevLocation={setLocation} />}
-          />
-          <Route
-            path="/search"
-            element={<SearchPage setPrevLocation={setLocation} />}
-          />
-          <Route
-            path="/movie/:movieId"
-            element={<MoviePage prevLocation={location} />}
-          >
+          <Route path="/" element={<HomePage />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/movie/:movieId" element={<MoviePage />}>
             <Route path="credits" element={<Credits />} />
             <Route path="reviews" element={<Reviews />} />
           </Route>

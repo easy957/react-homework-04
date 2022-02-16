@@ -1,5 +1,5 @@
 import { useQuery } from 'react-query';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useNavigate, useParams } from 'react-router-dom';
 
 import { searchById } from 'services/imdbAPI';
 import { queryClient } from 'index';
@@ -8,6 +8,7 @@ import styles from './MoviePage.module.css';
 export default function MoviePage({ prevLocation }) {
   const { movieId } = useParams();
   const cache = queryClient.getQueryData();
+  const navigate = useNavigate();
   const allCacheResults = cache?.pages?.reduce(
     (acc, page) => [...acc, ...page.results],
     []
@@ -26,16 +27,15 @@ export default function MoviePage({ prevLocation }) {
 
   return (
     <>
-      <Link
-        to={
-          prevLocation.pathname
-            ? prevLocation.pathname + prevLocation.search
-            : '/'
-        }
+      <button
+        type="button"
+        onClick={() => {
+          navigate(-1);
+        }}
         className={styles.Link_back}
       >
         Back
-      </Link>
+      </button>
 
       {data && (
         <div className={styles.Container}>
@@ -86,10 +86,18 @@ export default function MoviePage({ prevLocation }) {
           <p className={styles.Overview}>
             <b className={styles.Info_title}>Overview: </b> {data.overview}
           </p>
-          <Link className={styles.Button} to={`/movie/${movieId}/credits`}>
+          <Link
+            className={styles.Button}
+            to={`/movie/${movieId}/credits`}
+            replace
+          >
             Show credits
           </Link>
-          <Link className={styles.Button} to={`/movie/${movieId}/reviews`}>
+          <Link
+            className={styles.Button}
+            to={`/movie/${movieId}/reviews`}
+            replace
+          >
             Show reviews
           </Link>
           <Outlet />

@@ -1,13 +1,12 @@
 import Loader from 'components/Loader';
-import { useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import { useInfiniteQuery } from 'react-query';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 import { searchByName } from 'services/imdbAPI';
 import styles from './SearchPage.module.css';
 
-export default function SearchPage({ setPrevLocation }) {
+export default function SearchPage() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const searchQuery = searchParams.get('query');
@@ -21,11 +20,6 @@ export default function SearchPage({ setPrevLocation }) {
       enabled: !!searchQuery,
     }
   );
-
-  const location = useLocation();
-  useEffect(() => {
-    setPrevLocation(location);
-  }, [location, setPrevLocation]);
 
   const handleSubmit = e => {
     e.preventDefault();

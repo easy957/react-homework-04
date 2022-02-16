@@ -49,10 +49,14 @@
 }
 
 .Link_back {
+  background-color: transparent;
+  border: none;
   color: #fff;
   padding: 5px 0;
   text-decoration: underline;
   display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
 }
 
 .Button {
